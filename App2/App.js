@@ -1,42 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import {Camera} from "expo-camera"
-export default function App() {
-  const [type ,setType ] = useState(Camera.Constants.Type.back)
-  const [hasPermission, setHasPermission] = useState(null)
+import React from "react"
+import { NavigationConatiner } from "@react-navigation/native"
+import { createStackNavigation } from "@react-navigation/stack"
 
-  useEffect(() => (
-    (async() =>{
-      const {status} = await Camera.requestCameraPermissionsAsync()
-      setHasPermission(status = "granted")
-    })
-  ), [])
+import Contacts from "./src/pages/Contacts"
+import Information from "./src/pages/Information"
 
-  if (hasPermission === null){
-    return <View/>
-  }
-
-  if (hasPermission === false){
-    return <Text>Sem acesso a câmera</Text>
-      
-  }
-  return (
-    <SafeAreaView style={styles.container}>
-      <Camera
-      style={styles.camera}
-      type={type}
-      >
-
-      </Camera>
-    </SafeAreaView>
-  );
+const Stack = createStackNavigation()
+export default function App(){
+  return(
+    <NavigationConatiner>
+      <Stack.Navigator>
+        <Stack.Screen name="Contacts" component={Contacts} /> 
+        <Stack.Screen name="Information" component={Information} />
+      </Stack.Navigator>
+    </NavigationConatiner>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
