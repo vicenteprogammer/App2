@@ -1,18 +1,18 @@
 import React from "react"
-import { NavigationConatiner } from "@react-navigation/native"
-import { createStackNavigation } from "@react-navigation/stack"
+import { NavigationContainer } from "@react-navigation/native"
+import { createDrawerNavigator } from "@react-navigation/drawer"
 
 import Contacts from "./src/pages/Contacts"
 import Information from "./src/pages/Information"
 
-const Stack = createStackNavigation()
+const Stack = createDrawerNavigator() ;
 export default function App(){
   return(
-    <NavigationConatiner>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Contacts" component={Contacts} /> 
         <Stack.Screen name="Information" component={Information} />
       </Stack.Navigator>
-    </NavigationConatiner>
+    </NavigationContainer>
   )
 }
